@@ -12,6 +12,15 @@ export default function GistsDisplay(props){
     //     )
     // } 
 
+    const getAllFiles = (gist) => {
+        if (gist.files.length === 0){
+            props.getFilesFromGist({})
+        }
+        else{
+            props.getFilesFromGist(gist.files);
+        }
+    }
+
     return(
         <div className="container">
         <div className="row">
@@ -21,7 +30,7 @@ export default function GistsDisplay(props){
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
+                        <th scope="col">Number</th>
                         <th scope="col">Url</th>
                         <th scope="col">View All Files</th>
                         <th scope="col">View Last Forks</th>
@@ -32,7 +41,7 @@ export default function GistsDisplay(props){
                         return (<tr>
                             <th key={index} scope="row">{index}</th>
                             <td key={gist.url}><a href={gist.url}>{gist.url}</a></td>
-                            <td><button className = "btn btn-danger" onClick={()=>{}}>View files</button></td>
+                            <td><button className = "btn btn-danger" onClick={() => {getAllFiles(gist)}}>View files</button></td>
                             <td><button className = "btn btn-warning" onClick={()=>{}}>View forks</button></td>
                         </tr>
                         )
