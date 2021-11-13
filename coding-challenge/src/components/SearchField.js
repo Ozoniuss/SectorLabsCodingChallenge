@@ -2,26 +2,27 @@ import React from "react";
 import { useState } from "react";
 
 
-export default function SearchField(){
+export default function SearchField(props){
     const [username, setUsername] = useState("");
-    const [error, setError] = useState("");
 
-    const searchUser = () =>{
-        console.log('fsfafa')
+    const searchUserGists = () =>{
 
-        const requestOptions = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"}
-        };
-
-        fetch('GET github.com/Ozoniuss/gists/public/').then((response) =>
+        fetch('https://api.github.com/users/Ozoniuss/gists').then((response) =>
         {
-            if (response.ok){
-                return response.json();
-            }
-        }).then((data) => console.log(data));
-        ;
+           return response.json();
+        }).then(
+            (data) => {
+                props.getGists(data);
+                });
+        //displayGists();
     }
+
+    // const displayGists = () =>{
+    //     console.log(gists)
+    //     for (const key in gists){
+    //         console.log(gists[key]);
+    //     }
+    // }
 
     return (
         <div className="container">
@@ -44,7 +45,7 @@ export default function SearchField(){
                     </input>
                 </div>
                 <div className='col-6'>
-                    <button type="button" className="btn btn-primary" onClick={searchUser}>Search</button>
+                    <button type="button" className="btn btn-primary" onClick={searchUserGists}>Search</button>
                 </div>
             </div>
         </div>

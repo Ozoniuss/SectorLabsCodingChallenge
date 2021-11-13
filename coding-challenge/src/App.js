@@ -1,13 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import SearchField from './components/SearchField';
+import { useState } from 'react';
+import GistsDisplay from './components/GistsDisplay';
 
 function App() {
-  console.log('app createdf');
+  const [gists, setGists] = useState([]);
+
+  const getGists = (listOfGists) => {
+    setGists(listOfGists)
+  }
   
   return (
   <div className="container">
-      <SearchField/>
+    <div className="row mt-3"><GistsDisplay gists={gists}/></div>
+    <div className='row mt-3'><SearchField getGists={getGists}/></div>
   </div>
   )
 }
