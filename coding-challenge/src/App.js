@@ -13,8 +13,8 @@ function App() {
   
   return (
   <div className="container">
+    <div className='row mt-4'><SearchField getGists={getGists}/></div>
     <div className="row mt-3"><GistsDisplay gists={gists}/></div>
-    <div className='row mt-3'><SearchField getGists={getGists}/></div>
   </div>
   )
 }
