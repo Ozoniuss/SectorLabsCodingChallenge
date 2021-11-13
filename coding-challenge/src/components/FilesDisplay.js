@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-
+import Badge from 'react-bootstrap/Badge'
 export default function FilesDisplay(props)
 {
 
@@ -16,39 +15,70 @@ export default function FilesDisplay(props)
          })
     }
 
+    const removeExtension = (filename) => {
+        return filename.substring(0, filename.lastIndexOf("."));
+    }
+
     return (
         <div className="container">
         <div className="row">
-            <h2>All Files</h2>
+            <div className="col-10">
+            <   h2>All Files</h2>
+            </div>
+            <div className="col">
+                <button className = "btn btn-success" onClick={props.close}>Close</button>
+            </div>
         </div>
         <div className="row">
-            <table className="table table-striped">
+            {/* <table className="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">File Number</th>
                         <th scope="col">File Name</th>
-                        <th scope='col'>Programming Languages</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Object.keys(props.files).map((file, index) => {
                         return (<tr>
                             <td  scope="row">{index+1}</td>
-                            <td  scope="row" onClick={() => findFileCode(file)} >{props.files[file].filename}</td>
-                            <td  scope="row">{}</td>
+                            <td  scope="row" 
+                            onTouchMove="cursor.pointer" 
+                            onClick={() => findFileCode(file)}>
+                            <Badge bg="light" text="dark">
+                                {removeExtension(props.files[file].filename)} 
+                                <Badge bg="primary">
+                                    {props.files[file].language}
+                                </Badge>
+                            </Badge>
+
+                            </td>
                         </tr>
                         )
                     })}
                 </tbody>
-            </table>
+            </table> */}
+            {Object.keys(props.files).map((file, _) => {
+                return(
+                    <div className="col-3">
+                        <h5>
+                        <Badge bg="light" text="dark" onClick={() => findFileCode(file)}>
+                            {removeExtension(props.files[file].filename)}{"  "}
+                            <Badge bg="primary">
+                                {props.files[file].language !== null ?  props.files[file].language : "unknown"}
+                            </Badge>
+                        </Badge>
+                        </h5>
+                    </div>
+                ) 
+            })}
         </div>
-        <div className="row">
+        {/* <div className="row">
             <div className='col col-10'/>
             <div className='col-2'>
                 <button className = "btn btn-success" onClick={props.close}>Close</button>
             </div>
             
-        </div>
+        </div> */}
     </div>
     )
 }

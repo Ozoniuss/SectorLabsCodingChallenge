@@ -1,17 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 
 export default function GistsDisplay(props){
-
-    // const showGist = (gist, index) => {
-    //     return (<tr>
-    //         <th key={index} scope="row">{index}</th>
-    //         <td key={gist.url}><a href={gist.url}>{gist.url}</a></td>
-    //     </tr>
-    //     )
-    // } 
-
-    const [topThreeForkers, setTopThreeForkers] = useState({})
 
     const getAllFiles = (gist) => {
         if (gist.files.length === 0){
@@ -41,6 +30,7 @@ export default function GistsDisplay(props){
 
     const findLastThreeForkers = (forkers) =>{
         let lastThreeForkers = new Set()
+        console.log(forkers)
         for (const fork of forkers.slice().reverse()){
             lastThreeForkers.add(fork.owner.login);
 
@@ -50,13 +40,6 @@ export default function GistsDisplay(props){
         }
         return Array.from(lastThreeForkers);
     }
-
-    // const findLastThreeForkersForEachGist = () => {
-    //     props.gists.map((gist) => console.log(gist))
-    //     console.log('haha')
-    // }
-
-
 
 
     return(
@@ -77,9 +60,9 @@ export default function GistsDisplay(props){
                 <tbody>
                     {props.gists.map((gist, index) => {
                         return (<tr>
-                            <th key={index} scope="row">{index}</th>
-                            <td key={gist.url}>{gist.url}</td>
-                            <td><button className = "btn btn-warning" onClick={() => {getAllForks(gist)}}>View forks</button></td>
+                            <th key={gist.id}scope="row">{index+1}</th>
+                            <td key={gist.url}><a href={gist.html_url} target="_blank" rel="noreferrer">{gist.html_url}</a></td>
+                            <td><button className = "btn btn-warning" onClick={() => {getAllForks(gist)}}>View who forked</button></td>
                             <td><button className = "btn btn-danger" onClick={() => {getAllFiles(gist)}}>View files</button></td>
                         </tr>
                         )
