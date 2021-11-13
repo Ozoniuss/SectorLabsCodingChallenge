@@ -3,6 +3,19 @@ import { useState } from 'react';
 
 export default function FilesDisplay(props)
 {
+
+    const togglePopup = (text) => {
+        props.togglePopup(text)
+    }
+
+    const findFileCode = (file) => {
+        const url =props.files[file].raw_url;
+        fetch(url).then((response)=>{ return response.text() })
+        .then((text)=>{ 
+            togglePopup(text);
+         })
+    }
+
     return (
         <div className="container">
         <div className="row">
@@ -21,7 +34,7 @@ export default function FilesDisplay(props)
                     {Object.keys(props.files).map((file, index) => {
                         return (<tr>
                             <td  scope="row">{index+1}</td>
-                            <td  scope="row" ><a href={props.files[file].raw_url}>{props.files[file].filename}</a></td>
+                            <td  scope="row" onClick={() => findFileCode(file)} >{props.files[file].filename}</td>
                             <td  scope="row">{}</td>
                         </tr>
                         )

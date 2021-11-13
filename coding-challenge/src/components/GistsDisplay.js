@@ -57,6 +57,8 @@ export default function GistsDisplay(props){
     // }
 
 
+
+
     return(
         <div className="container">
         <div className="row">
@@ -76,7 +78,7 @@ export default function GistsDisplay(props){
                     {props.gists.map((gist, index) => {
                         return (<tr>
                             <th key={index} scope="row">{index}</th>
-                            <td key={gist.url}><a href={gist.html_url} target="_blank">{gist.url}</a></td>
+                            <td key={gist.url}>{gist.url}</td>
                             <td><button className = "btn btn-warning" onClick={() => {getAllForks(gist)}}>View forks</button></td>
                             <td><button className = "btn btn-danger" onClick={() => {getAllFiles(gist)}}>View files</button></td>
                         </tr>
