@@ -8,28 +8,19 @@ export default function ForksDisplay(props){
             <h2>Latest three forkers</h2>
         </div>
         <div className="row">
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">User Number</th>
-                        <th scope="col">User Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.forks.map((fork, index) => {
-                        return (<tr>
-                            <td  scope="row">{index+1}</td>
-                            <td  scope="row" >{fork}</td>
-                        </tr>
+            <ol className="list-group list-group-numbered">
+                    {props.forks.map((fork) => {
+                        return (<li class="list-group-item">
+                            {fork}
+                        </li>
                         )
                     })}
-                </tbody>
-            </table>
+            </ol>
         </div>
-        <div className="row">
-            <div className='col col-10'/>
-            <div className='col-2'>
-                <button className = "btn btn-success" onClick={props.close}>Close</button>
+        <div className="row mt-3">
+            <div className='col col-9'/>
+            <div className='col'>
+                <button className = "btn col-8 btn-success" onClick={props.close}>Close</button>
             </div>
             
         </div>

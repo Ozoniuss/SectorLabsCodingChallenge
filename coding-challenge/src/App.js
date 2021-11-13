@@ -10,7 +10,7 @@ function App() {
   const [gists, setGists] = useState([]);
 
   const [filesFromGist, setFilesFromGist] = useState({});
-  const [lastThreeForks, setLastThreeForks] = useState({})
+  const [lastThreeForkers, setLastThreeForkers] = useState([])
 
 
   const getGists = (listOfGists) => {
@@ -24,13 +24,13 @@ function App() {
   }
 
   const getForkersFromGist = (listOfForkers) => {
-    setLastThreeForks(listOfForkers);
+    setLastThreeForkers(listOfForkers);
     console.log(listOfForkers);
   }
 
   useEffect(() => {
     setFilesFromGist({});
-    setLastThreeForks([])}, []) // close remaining files from previous gist when loading the page
+    setLastThreeForkers([])}, []) // close remaining files from previous gist when loading the page
 
   return (
   <div className="container">
@@ -38,7 +38,7 @@ function App() {
     <div className="row mt-3"><GistsDisplay gists={gists} getFilesFromGist={getFilesFromGist} getForksFromGist={getForkersFromGist}/></div>
     <div className='row mt-3'>{Object.keys(filesFromGist).length !== 0 ? <FilesDisplay files={filesFromGist} close={() => setFilesFromGist({})}/> : <></>}</div>
     <div className='row mt-3'>
-      {lastThreeForks.length !== 0 ? <ForksDisplay forks={lastThreeForks} close={() => setLastThreeForks([])}/> : <></>}
+      {lastThreeForkers.length !== 0 ? <ForksDisplay forks={lastThreeForkers} close={() => setLastThreeForkers([])}/> : <></>}
     </div>
   </div>
   
