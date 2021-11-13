@@ -32,14 +32,15 @@ export default function SearchField(props){
     return (
         <div className="container">
             <div className='row'>
-                <div className='col-2'/>
-                <div className="col-6">
+                <div className='col-4'/>
+                <div className="col-4">
                     <h2>Search for a github user</h2>
                 </div>
-                <div className='col2'/>
+                <div className='col-4'/>
             </div>
 
             <div className="row">
+                <div className='col-2'/>
                 <div className='col-6'>
                     <input className="form-control"
                         id="name-field" 
@@ -49,7 +50,7 @@ export default function SearchField(props){
                         onChange={ (e) => setUsername(e.target.value)}>
                     </input>
                 </div>
-                <div className='col-6'>
+                <div className='col-2'>
                     <button type="button" className="btn btn-primary" onClick={searchUserGists}>Search</button>
                 </div>
             </div>

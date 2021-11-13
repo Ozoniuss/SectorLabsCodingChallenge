@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 export default function GistsDisplay(props){
 
+    const [lastForkedBy, setLastForkedBy] = useState([]);
+
 
     // const showGist = (gist, index) => {
     //     return (<tr>
@@ -21,6 +23,18 @@ export default function GistsDisplay(props){
         }
     }
 
+    const getAllForks = (gist) => {
+        const url = gist.forks_url;
+        fetch(url).then((response) =>
+        {return response.json()}).then((data) => findLastThreeForkers(data))
+    }
+
+    const findLastThreeForkers = (forkers) =>{
+        for (const fork of forkers.slice().reverse()){
+            console.log(fork.owner);
+        }
+    }
+
     return(
         <div className="container">
         <div className="row">
@@ -32,17 +46,17 @@ export default function GistsDisplay(props){
                     <tr>
                         <th scope="col">Number</th>
                         <th scope="col">Url</th>
+                        <th scope="col">Last Forked By</th>
                         <th scope="col">View All Files</th>
-                        <th scope="col">View Last Forks</th>
                     </tr>
                 </thead>
                 <tbody>
                     {props.gists.map((gist, index) => {
                         return (<tr>
                             <th key={index} scope="row">{index}</th>
-                            <td key={gist.url}><a href={gist.url}>{gist.url}</a></td>
+                            <td key={gist.url}><a href={gist.html_url} target="_blank">{gist.url}</a></td>
+                            <td><button className = "btn btn-warning" onClick={()=>{getAllForks(gist)}}>View forks</button></td>
                             <td><button className = "btn btn-danger" onClick={() => {getAllFiles(gist)}}>View files</button></td>
-                            <td><button className = "btn btn-warning" onClick={()=>{}}>View forks</button></td>
                         </tr>
                         )
                     })}
