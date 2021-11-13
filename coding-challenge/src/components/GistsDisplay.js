@@ -6,8 +6,8 @@ export default function GistsDisplay(props){
 
     const showGist = (gist) => {
         return (<tr>
-            <th scope="row">{gist.id}</th>
-            <td><a href={gist.url}>{gist.url}</a></td>
+            <th key={gist.id} scope="row">{gist.id}</th>
+            <td key={gist.url}><a href={gist.url}>{gist.url}</a></td>
         </tr>
         )
     } 

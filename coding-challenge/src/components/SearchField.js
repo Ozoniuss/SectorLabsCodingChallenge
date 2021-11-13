@@ -7,11 +7,16 @@ export default function SearchField(props){
 
     const searchUserGists = () =>{
 
-        fetch('https://api.github.com/users/Ozoniuss/gists').then((response) =>
-        {
-           return response.json();
+        fetch(`https://api.github.com/users/${username}/gists`).then((response) =>
+        {if (response.ok){
+            return response.json();
+        }
+        else{
+            return []
+        }
         }).then(
             (data) => {
+                console.log(data);
                 props.getGists(data);
                 });
         //displayGists();
