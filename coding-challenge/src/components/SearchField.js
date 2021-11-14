@@ -43,7 +43,7 @@ export default function SearchField(props){
 
             <div className="row">
                 <div className='col-2'/>
-                <div className='col-6'>
+                <div className='col-7'>
                     {isInvalidUser === true ? 
                     <>
                     <input className="form-control is-invalid"
