@@ -4,6 +4,12 @@ import { useState } from "react";
 
 export default function SearchField(props){
     const [username, setUsername] = useState("");
+    const [isInvalidUser, setIsInvalidUser] = useState(false);
+
+    const handlerFormControl = (e) =>{
+        setUsername(e.target.value);
+        setIsInvalidUser(false);
+    }
 
     const searchUserGists = () =>{
 
@@ -12,6 +18,7 @@ export default function SearchField(props){
             return response.json();
         }
         else{
+            setIsInvalidUser(true);
             return []
         }
         }).then(
@@ -19,15 +26,8 @@ export default function SearchField(props){
                 console.log(data);
                 props.getGists(data);
                 });
-        //displayGists();
     }
 
-    // const displayGists = () =>{
-    //     console.log(gists)
-    //     for (const key in gists){
-    //         console.log(gists[key]);
-    //     }
-    // }
 
     return (
         <div className="container">
@@ -42,13 +42,36 @@ export default function SearchField(props){
             <div className="row">
                 <div className='col-2'/>
                 <div className='col-6'>
+                    {isInvalidUser === true ? 
+                    <>
+                    <input className="form-control is-invalid"
+                        id="name-field" 
+                        type="text"
+                        placeholder={"Username"} 
+                        value={username} 
+                        onChange={ (e) => handlerFormControl(e)}>
+                    </input>
+                    <div class="invalid-feedback">
+                    This user does not have a github account
+                    </div>
+                    </>
+                    :                   
                     <input className="form-control"
                         id="name-field" 
                         type="text"
                         placeholder={"Username"} 
                         value={username} 
                         onChange={ (e) => setUsername(e.target.value)}>
-                    </input>
+                    </input>}
+                    
+                    {/* <input className="form-control"
+                        id="name-field" 
+                        type="text"
+                        placeholder={"Username"} 
+                        value={username} 
+                        onChange={ (e) => setUsername(e.target.value)}>
+                    </input> */}
+
                 </div>
                 <div className='col-2'>
                     <button type="button" className="btn btn-primary" onClick={searchUserGists}>Search</button>
