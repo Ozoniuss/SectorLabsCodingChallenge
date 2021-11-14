@@ -2,12 +2,14 @@ import React from 'react';
 import GistDisplayItem from './GistDisplayItem';
 export default function GistsDisplay(props){
 
-    const getAllFiles = (gist) => {
+    const getAllFiles = (gist, index) => {
         if (gist.files.length === 0){
             props.getFilesFromGist({})
+            props.getGistIndex(index);
         }
         else{
             props.getFilesFromGist(gist.files);
+            props.getGistIndex(index);
         }
     }
 
@@ -34,7 +36,7 @@ export default function GistsDisplay(props){
                             key={gist.id}
                             gist={gist} 
                             index={index} 
-                            getAllFiles={getAllFiles}/>
+                            getAllFiles={() => getAllFiles(gist, index)}/>
 
                         )
                     })}

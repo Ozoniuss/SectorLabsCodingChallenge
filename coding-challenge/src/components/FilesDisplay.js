@@ -24,7 +24,7 @@ export default function FilesDisplay(props)
         <div className="container">
         <div className="row">
             <div className="col-10">
-            <   h2>All Files</h2>
+            <   h2>All Files for gist {props.gistIndex}</h2>
             </div>
             <div className="col">
                 <button className = "btn btn-success" onClick={props.close}>Close</button>
