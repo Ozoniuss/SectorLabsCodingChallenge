@@ -1,27 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
 import SearchField from './components/SearchField';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import GistsDisplay from './components/GistsDisplay';
 import FilesDisplay from './components/FilesDisplay';
-import ForksDisplay from './components/ForksDisplay';
+
 import Popup from './components/Popup';
 
 function App() {
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPopupOpen, setisPopupOpen] = useState(false);
   const [content, setContent] = useState("");
  
   const togglePopup = (text) => {
     setContent(text);
-    setIsOpen(!isOpen);
+    setisPopupOpen(!isPopupOpen);
   }
 
   const [gists, setGists] = useState([]);
 
   const [filesFromGist, setFilesFromGist] = useState({});
-  const [lastThreeForkers, setLastThreeForkers] = useState([]);
 
+  //the gist number in the file views component
   const [gistShowing, setGistShowing] = useState(0);
 
 
@@ -39,29 +38,32 @@ function App() {
     console.log("files" + filesObject)
   }
 
-  const getForkersFromGist = (listOfForkers) => {
-    let newForkers = []
-    for (let forker of listOfForkers){
-      newForkers.push(forker);
-    }
-    setLastThreeForkers(newForkers);
-    console.log("forkers" + listOfForkers);
-  }
-
-  useEffect(() => {
-    setFilesFromGist({});
-    setLastThreeForkers([])}, []) // close remaining files from previous gist when loading the page
-
   return (
   <div className="container">
-    <div className='row mt-4'><SearchField getGists={getGists}/></div>
-    <div className="row mt-3"><GistsDisplay gists={gists} getFilesFromGist={getFilesFromGist} getGistIndex={(index) => setGistShowing(index)} changeGistShowing={() => setGistShowing()}/></div>
-    <div className='row mt-3'>{Object.keys(filesFromGist).length !== 0 ? <FilesDisplay gistIndex={gistShowing+1} files={filesFromGist} togglePopup={togglePopup} close={() => setFilesFromGist({}) }/> : <></>}</div>
+    <div className='row mt-4'>
+      <SearchField getGists={getGists}/>
+    </div>
+    <div className="row mt-3">
+      <GistsDisplay 
+        gists={gists} 
+        getFilesFromGist={getFilesFromGist} 
+        getGistIndex={(index) => setGistShowing(index)} 
+        changeGistShowing={() => setGistShowing()}/>
+    </div>
     <div className='row mt-3'>
-      {lastThreeForkers.length !== 0 ? <ForksDisplay forks={lastThreeForkers} close={() => setLastThreeForkers([])}/> : <></>}
-      {isOpen && <Popup content={content}
-      handleClose={togglePopup}
-    />}
+      {Object.keys(filesFromGist).length !== 0 ? 
+        <FilesDisplay 
+          gistIndex={gistShowing+1} 
+          files={filesFromGist} 
+          togglePopup={togglePopup} 
+          close={() => setFilesFromGist({}) }/> 
+        : 
+        <></>}
+    </div>
+    <div className='row mt-3'>
+      {isPopupOpen && <Popup content={content}
+        handleClose={togglePopup}
+      />}
     </div>
   </div>
   

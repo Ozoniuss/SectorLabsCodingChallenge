@@ -9,14 +9,19 @@ export default function FilesDisplay(props)
     }
 
     const findFileCode = (file) => {
-        const url =props.files[file].raw_url;
-        fetch(url).then((response)=>{ return response.text() })
-        .then((text)=>{ 
+        //get the raw file url
+        const url = props.files[file].raw_url;
+
+        fetch(url).then((response)=>{ 
+            if(response.ok){
+            return response.text()
+        }}).then((text)=>{ 
             togglePopup(text);
-         })
+         }).catch(error => {console.log(error)});
     }
 
     const removeExtension = (filename) => {
+        //remove the extension to convert to a badge
         return filename.substring(0, filename.lastIndexOf("."));
     }
 

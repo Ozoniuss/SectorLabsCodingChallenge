@@ -4,7 +4,11 @@ export default function GistsDisplay(props){
 
     const getAllFiles = (gist, index) => {
         if (gist.files.length === 0){
+            
+            //callback to the function that retrieves the content files of the gist
             props.getFilesFromGist({})
+            
+            //this is used to determine the gist number displayed in the heading of the FilesDisplay component
             props.getGistIndex(index);
         }
         else{
@@ -33,10 +37,11 @@ export default function GistsDisplay(props){
                     {props.gists.map((gist, index) => {
                         return(
                             <GistDisplayItem 
-                            key={gist.id}
-                            gist={gist} 
-                            index={index} 
-                            getAllFiles={() => getAllFiles(gist, index)}/>
+                                key={gist.id}
+                                gist={gist} 
+                                index={index} 
+                                getAllFiles={() => getAllFiles(gist, index)}
+                            />
 
                         )
                     })}
