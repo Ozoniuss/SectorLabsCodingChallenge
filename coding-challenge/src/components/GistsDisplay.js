@@ -14,35 +14,35 @@ export default function GistsDisplay(props){
     }
 
 
-    return(
-        <div className="container">
-        <div className="row">
-            <h2>All Gists</h2>
+        return(
+            <div className="container">
+            <div className="row">
+                <h2>All Gists</h2>
+            </div>
+            <div className="row">
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Number</th>
+                            <th scope="col">Url</th>
+                            <th scope="col">Last Forked By</th>
+                            <th scope="col">View All Files</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.gists.map((gist, index) => {
+                            return(
+                                <GistDisplayItem 
+                                key={gist.id}
+                                gist={gist} 
+                                index={index} 
+                                getAllFiles={() => getAllFiles(gist, index)}/>
+    
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div className="row">
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Number</th>
-                        <th scope="col">Url</th>
-                        <th scope="col">Last Forked By</th>
-                        <th scope="col">View All Files</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.gists.map((gist, index) => {
-                        return(
-                            <GistDisplayItem 
-                            key={gist.id}
-                            gist={gist} 
-                            index={index} 
-                            getAllFiles={() => getAllFiles(gist, index)}/>
-
-                        )
-                    })}
-                </tbody>
-            </table>
-        </div>
-    </div>
-    )
-}
+        )
+    }

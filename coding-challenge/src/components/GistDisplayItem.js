@@ -26,16 +26,18 @@ export default function GistDisplayItem(props){
 
 
     const findLastThreeForkers = (forkers) =>{
-        let lastThreeForkers = new Set()
+        let lastThreeForkersSet = new Set(); // a set to find out when we have 3 different
+        let lastThreeForkers = [];
         console.log(forkers)
         for (const fork of forkers.slice().reverse()){
-            lastThreeForkers.add(fork.owner.login);
+            lastThreeForkersSet.add(fork.owner.login);
+            lastThreeForkers.push(fork.owner.login);
 
-            if (lastThreeForkers.size === 3){
+            if (lastThreeForkersSet.size === 3){
                 break;
             }
         }
-        return Array.from(lastThreeForkers);
+        return lastThreeForkers;
     }
 
     return(
