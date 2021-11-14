@@ -20,7 +20,9 @@ function App() {
   const [gists, setGists] = useState([]);
 
   const [filesFromGist, setFilesFromGist] = useState({});
-  const [lastThreeForkers, setLastThreeForkers] = useState([])
+  const [lastThreeForkers, setLastThreeForkers] = useState([]);
+
+  const [gistShowing, setGistShowing] = useState({});
 
 
   const getGists = (listOfGists) => {
@@ -53,7 +55,7 @@ function App() {
   return (
   <div className="container">
     <div className='row mt-4'><SearchField getGists={getGists}/></div>
-    <div className="row mt-3"><GistsDisplay gists={gists} getFilesFromGist={getFilesFromGist} getForksFromGist={getForkersFromGist}/></div>
+    <div className="row mt-3"><GistsDisplay gists={gists} getFilesFromGist={getFilesFromGist} getForksFromGist={getForkersFromGist} changeGistShowing={() => setGistShowing()}/></div>
     <div className='row mt-3'>{Object.keys(filesFromGist).length !== 0 ? <FilesDisplay files={filesFromGist} togglePopup={togglePopup} close={() => setFilesFromGist({}) }/> : <></>}</div>
     <div className='row mt-3'>
       {lastThreeForkers.length !== 0 ? <ForksDisplay forks={lastThreeForkers} close={() => setLastThreeForkers([])}/> : <></>}

@@ -35,6 +35,7 @@ export default function GistsDisplay(props){
                             gist={gist} 
                             index={index} 
                             getAllFiles={getAllFiles}/>
+
                         )
                     })}
                 </tbody>
