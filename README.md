@@ -33,4 +33,4 @@ The `FilesDisplay` component will display all the files, showing with the respec
 
 ## Notes:
 
-I initially created a django project to try and implement some extra backend functionalities. Unfortunately, I wasn't able to connect to the gist API in a timely manner, so I gave up on the idea and resumed with a React project.
+I initially created a Django project to try and implement some extra backend functionalities. Unfortunately, I wasn't able to connect to the gist API in a timely manner, so I gave up on the idea and resumed with a React project.
