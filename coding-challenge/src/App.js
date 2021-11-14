@@ -4,17 +4,17 @@ import SearchField from './components/SearchField';
 import { useState, useEffect } from 'react';
 import GistsDisplay from './components/GistsDisplay';
 import FilesDisplay from './components/FilesDisplay';
-import ForksDisplay from './components/ForksDisplay';
+
 import Popup from './components/Popup';
 
 function App() {
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPopupOpen, setisPopupOpen] = useState(false);
   const [content, setContent] = useState("");
  
   const togglePopup = (text) => {
     setContent(text);
-    setIsOpen(!isOpen);
+    setisPopupOpen(!isPopupOpen);
   }
 
   const [gists, setGists] = useState([]);
@@ -54,14 +54,30 @@ function App() {
 
   return (
   <div className="container">
-    <div className='row mt-4'><SearchField getGists={getGists}/></div>
-    <div className="row mt-3"><GistsDisplay gists={gists} getFilesFromGist={getFilesFromGist} getGistIndex={(index) => setGistShowing(index)} changeGistShowing={() => setGistShowing()}/></div>
-    <div className='row mt-3'>{Object.keys(filesFromGist).length !== 0 ? <FilesDisplay gistIndex={gistShowing+1} files={filesFromGist} togglePopup={togglePopup} close={() => setFilesFromGist({}) }/> : <></>}</div>
+    <div className='row mt-4'>
+      <SearchField getGists={getGists}/>
+    </div>
+    <div className="row mt-3">
+      <GistsDisplay 
+        gists={gists} 
+        getFilesFromGist={getFilesFromGist} 
+        getGistIndex={(index) => setGistShowing(index)} 
+        changeGistShowing={() => setGistShowing()}/>
+    </div>
     <div className='row mt-3'>
-      {lastThreeForkers.length !== 0 ? <ForksDisplay forks={lastThreeForkers} close={() => setLastThreeForkers([])}/> : <></>}
-      {isOpen && <Popup content={content}
-      handleClose={togglePopup}
-    />}
+      {Object.keys(filesFromGist).length !== 0 ? 
+        <FilesDisplay 
+          gistIndex={gistShowing+1} 
+          files={filesFromGist} 
+          togglePopup={togglePopup} 
+          close={() => setFilesFromGist({}) }/> 
+        : 
+        <></>}
+    </div>
+    <div className='row mt-3'>
+      {isPopupOpen && <Popup content={content}
+        handleClose={togglePopup}
+      />}
     </div>
   </div>
   

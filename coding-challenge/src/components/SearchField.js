@@ -4,14 +4,18 @@ import { useState } from "react";
 
 export default function SearchField(props){
     const [username, setUsername] = useState("");
+
+    //if the user is invalid, the input field gets highlighted in red
     const [isInvalidUser, setIsInvalidUser] = useState(false);
 
     const handlerFormControl = (e) =>{
         setUsername(e.target.value);
+
+        //we'll remove the invalid message if the user starts typing another username
         setIsInvalidUser(false);
     }
 
-    const searchUserGists = () =>{
+    const handleSearchUserGists = () =>{
 
         fetch(`https://api.github.com/users/${username}/gists`).then((response) =>
         {if (response.ok){
@@ -19,13 +23,11 @@ export default function SearchField(props){
         }
         else{
             setIsInvalidUser(true);
-            return []
+            return [] // the response actually returns a list
         }
-        }).then(
-            (data) => {
-                console.log(data);
-                props.getGists(data);
-                });
+        }).then((data) => {
+            props.getGists(data);
+        });
     }
 
 
@@ -63,18 +65,9 @@ export default function SearchField(props){
                         value={username} 
                         onChange={ (e) => setUsername(e.target.value)}>
                     </input>}
-                    
-                    {/* <input className="form-control"
-                        id="name-field" 
-                        type="text"
-                        placeholder={"Username"} 
-                        value={username} 
-                        onChange={ (e) => setUsername(e.target.value)}>
-                    </input> */}
-
                 </div>
                 <div className='col-2'>
-                    <button type="button" className="btn btn-primary" onClick={searchUserGists}>Search</button>
+                    <button type="button" className="btn btn-primary" onClick={handleSearchUserGists}>Search</button>
                 </div>
             </div>
         </div>
