@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import SearchField from './components/SearchField';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import GistsDisplay from './components/GistsDisplay';
 import FilesDisplay from './components/FilesDisplay';
 
@@ -20,8 +19,8 @@ function App() {
   const [gists, setGists] = useState([]);
 
   const [filesFromGist, setFilesFromGist] = useState({});
-  const [lastThreeForkers, setLastThreeForkers] = useState([]);
 
+  //the gist number in the file views component
   const [gistShowing, setGistShowing] = useState(0);
 
 
@@ -38,19 +37,6 @@ function App() {
     setFilesFromGist(filesObject);
     console.log("files" + filesObject)
   }
-
-  const getForkersFromGist = (listOfForkers) => {
-    let newForkers = []
-    for (let forker of listOfForkers){
-      newForkers.push(forker);
-    }
-    setLastThreeForkers(newForkers);
-    console.log("forkers" + listOfForkers);
-  }
-
-  useEffect(() => {
-    setFilesFromGist({});
-    setLastThreeForkers([])}, []) // close remaining files from previous gist when loading the page
 
   return (
   <div className="container">

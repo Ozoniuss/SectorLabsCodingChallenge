@@ -9,7 +9,7 @@ export default function GistDisplayItem(props){
         //url corresponding to gist forks
         const url = props.gist.forks_url;
         
-        fetch(props.gist.forks_url).then((response) =>
+        fetch(url).then((response) =>
         {if (response.ok)
             {return response.json()}
         }).then(
