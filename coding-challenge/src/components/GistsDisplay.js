@@ -62,7 +62,11 @@ export default function GistsDisplay(props){
                         return (<tr>
                             <th key={gist.id}scope="row">{index+1}</th>
                             <td key={gist.url}><a href={gist.html_url} target="_blank" rel="noreferrer">{gist.html_url}</a></td>
-                            <td><button className = "btn btn-warning" onClick={() => {getAllForks(gist)}}>View who forked</button></td>
+                            <td>
+                                <button className = "btn btn-warning" onClick={() => {getAllForks(gist)}}>
+                                    View who forked
+                                    </button>
+                            </td>
                             <td><button className = "btn btn-danger" onClick={() => {getAllFiles(gist)}}>View files</button></td>
                         </tr>
                         )
