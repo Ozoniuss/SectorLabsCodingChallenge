@@ -24,18 +24,26 @@ function App() {
 
 
   const getGists = (listOfGists) => {
-    setGists(listOfGists)
+    let newGists = []
+    for (let gist of listOfGists){
+      newGists.push(gist)
+    }
+    setGists(newGists);
     setFilesFromGist({})  // delete files from previous gists
   }
   
   const getFilesFromGist = (filesObject) => {
     setFilesFromGist(filesObject);
-    console.log(filesObject)
+    console.log("files" + filesObject)
   }
 
   const getForkersFromGist = (listOfForkers) => {
-    setLastThreeForkers(listOfForkers);
-    console.log(listOfForkers);
+    let newForkers = []
+    for (let forker of listOfForkers){
+      newForkers.push(forker);
+    }
+    setLastThreeForkers(newForkers);
+    console.log("forkers" + listOfForkers);
   }
 
   useEffect(() => {

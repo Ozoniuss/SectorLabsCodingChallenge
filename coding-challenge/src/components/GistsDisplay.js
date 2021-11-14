@@ -31,6 +31,7 @@ export default function GistsDisplay(props){
                     {props.gists.map((gist, index) => {
                         return(
                             <GistDisplayItem 
+                            key={gist.id}
                             gist={gist} 
                             index={index} 
                             getAllFiles={getAllFiles}/>
